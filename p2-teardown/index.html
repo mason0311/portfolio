@@ -1,0 +1,173 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Portal 2 新手教学拆解 · 关卡设计作品集</title>
+<style>
+  :root{
+    --ink:#111827; --sub:#4B5563; --mut:#9CA3AF; --line:#E5E7EB;
+    --paper:#F4F4F1; --card:#FFFFFF; --teal:#0E7C86; --red:#B91C1C; --amber:#B45309;
+  }
+  *{box-sizing:border-box}
+  html,body{margin:0;padding:0}
+  body{overflow-x:hidden}
+  body{
+    background:var(--paper); color:var(--ink);
+    font-family:"Microsoft YaHei","PingFang SC","Segoe UI",system-ui,sans-serif;
+    line-height:1.75; -webkit-font-smoothing:antialiased;
+  }
+  .wrap{max-width:1080px;margin:0 auto;padding:56px 28px 80px}
+  header{border-bottom:2px solid var(--ink);padding-bottom:26px;margin-bottom:40px}
+  .kicker{font-size:13px;letter-spacing:.16em;color:var(--mut);text-transform:uppercase;margin-bottom:14px}
+  h1{font-size:40px;line-height:1.25;overflow-wrap:anywhere;margin:0 0 14px;font-weight:800;letter-spacing:-.5px}
+  h1 small{display:block;font-size:19px;font-weight:400;color:var(--sub);margin-top:10px;letter-spacing:0}
+  .meta{font-size:13.5px;color:var(--sub)}
+  .meta span{display:inline-block;margin-right:18px}
+  .stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:14px;margin:34px 0 0}
+  .stat{background:var(--card);border:1px solid var(--line);border-radius:10px;padding:16px 18px}
+  .stat b{display:block;font-size:27px;line-height:1.3;letter-spacing:-.5px}
+  .stat i{display:block;font-style:normal;font-size:12.5px;color:var(--sub);margin-top:4px}
+  section{margin:52px 0}
+  h2{font-size:22px;font-weight:800;margin:0 0 8px;display:flex;align-items:baseline;gap:12px}
+  h2 em{font-style:normal;font-size:12.5px;font-weight:400;color:var(--mut);letter-spacing:.04em}
+  .lead{color:var(--sub);font-size:15px;margin:0 0 22px}
+  figure{margin:0 0 10px}
+  figure img{max-width:100%;width:100%;height:auto;display:block;border:1px solid var(--line);border-radius:8px;background:#fff}
+  figcaption{font-size:12.5px;color:var(--mut);margin-top:10px}
+  .pair{display:grid;grid-template-columns:1fr 1fr;gap:22px}
+  .pair figure{margin:0}
+  .pair h3{font-size:16px;margin:0 0 8px;font-weight:800}
+  .pair h3 span{font-weight:400;color:var(--mut);font-size:12.5px;margin-left:8px}
+  .pair p{font-size:13.5px;color:var(--sub);margin:10px 0 0}
+  ol.findings{list-style:none;counter-reset:f;padding:0;margin:0;display:grid;gap:16px}
+  ol.findings li{counter-increment:f;background:var(--card);border:1px solid var(--line);border-left:3px solid var(--teal);border-radius:8px;padding:18px 22px 16px 22px;position:relative}
+  ol.findings li::before{content:counter(f,decimal-leading-zero);position:absolute;top:16px;left:-1px;transform:translateX(-100%);padding-right:14px;font-weight:800;color:var(--teal);font-size:15px}
+  ol.findings{list-style:none;padding-left:44px}
+  ol.findings b{display:block;font-size:15.5px;margin-bottom:4px}
+  ol.findings p{margin:0;font-size:14px;color:var(--sub)}
+  .methods{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;margin-top:6px}
+  .method{background:var(--card);border:1px solid var(--line);border-radius:8px;padding:18px}
+  .method b{display:block;font-size:14.5px;margin-bottom:6px}
+  .method p{margin:0;font-size:13px;color:var(--sub)}
+  .method em{display:block;font-style:normal;font-size:11.5px;color:var(--mut);margin-top:10px}
+  .note{background:#FFF9F0;border:1px solid #F3DFC0;border-radius:8px;padding:18px 22px;font-size:13.5px;color:#6B4A12}
+  .note b{color:var(--amber)}
+  footer{border-top:1px solid var(--line);margin-top:60px;padding-top:24px;font-size:12.5px;color:var(--mut);display:flex;justify-content:space-between;gap:20px;flex-wrap:wrap}
+  footer a{color:var(--sub);text-decoration:none;border-bottom:1px solid var(--line)}
+  @media (max-width:820px){
+    h1{font-size:29px}
+    .stats{grid-template-columns:repeat(2,1fr)}
+    .pair,.methods{grid-template-columns:1fr}
+    .wrap{padding:36px 18px 60px}
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <header>
+    <div class="kicker">Level Design Teardown · Piece 01</div>
+    <h1>Portal 2 · 新手教学的七个房间
+      <small>把「教学」拆成可数的东西：时间码、平面图、代价表</small>
+    </h1>
+    <div class="meta">
+      <span>单人战役 · 第一章</span>
+      <span>实机录像 38:30</span>
+      <span>2026-11</span>
+    </div>
+    <div class="stats">
+      <div class="stat"><b>7</b><i>手工切分的教学房间</i></div>
+      <div class="stat"><b>20:28</b><i>教学段总时长（占比 55%）</i></div>
+      <div class="stat"><b>1 变量</b><i>每间只新增一个机制</i></div>
+      <div class="stat"><b>6.7%</b><i>视角重复率（全段最高的一间）</i></div>
+    </div>
+  </header>
+
+  <section>
+    <h2>全景 <em>七张平面图 · 40px = 1m</em></h2>
+    <p class="lead">同一套符号、同一比例尺，把「一间房教一件事」的序列摊开看。</p>
+    <figure>
+      <img src="assets/overview.png" alt="Portal 2 新手教学七间房平面图总览">
+      <figcaption>初始段 → 01 → 06。每张图含入口/出口、机关符号、玩家动线（蓝虚线）与决策点标注。</figcaption>
+    </figure>
+  </section>
+
+  <section>
+    <h2>两间关键的房 <em>一间暴露问题，一间给出答案</em></h2>
+    <div class="pair">
+      <figure>
+        <h3>03 · 引导断在这里 <span>3:14</span></h3>
+        <img src="assets/room03.png" alt="测试室 03 平面图，标注瞎转区域">
+        <p>进门 5 秒就给传送门枪，但全屋没有一处提示「门可以建在高处」。红虚线圈内是玩家往返最久的区域——视角重复率 6.7%，七间最高。</p>
+      </figure>
+      <figure>
+        <h3>05 · 限制即教学 <span>2:37</span></h3>
+        <img src="assets/room05.png" alt="测试室 05 平面图，标注不可建门墙体">
+        <p>不新增任何机制，只在灰色墙面上让「建门」失效。玩家被迫把门重新理解为「可以被限制的工具」——六间里信息密度最高的一间。</p>
+      </figure>
+    </div>
+  </section>
+
+  <section>
+    <h2>三条结论 <em>每条都能落到图或数</em></h2>
+    <p class="lead">这部分是拆解真正要交的东西：不是描述关卡长什么样，而是它为什么这样长。</p>
+    <ol class="findings">
+      <li>
+        <b>抬的是「犯错代价」，不是难度。</b>
+        <p>前四间的代价是「无 / 重来几秒」，05 才出现「拿不到重物则不通」，06 才出现「乱跳卡关」。玩家在 15 分钟里以为自己在变强，其实是在被逐步收网。</p>
+      </li>
+      <li>
+        <b>03 缺的是「指向」，不是难度。</b>
+        <p>解法只有一步「把门建在高处」，但没有任何视觉或声音引导。3:14 里约 41% 的时间在同一片庭院与楼梯之间重复经过——这是引导缺口，不是谜题难度。</p>
+      </li>
+      <li>
+        <b>05 用「禁止」当教学，效率最高。</b>
+        <p>2:37 内完成从「会」到「懂」的跳跃：机制不变，只让它在某些地方失效，玩家就自己发现了新用法。限制本身就是教学工具。</p>
+      </li>
+    </ol>
+  </section>
+
+  <section>
+    <h2>我怎么做这份拆解 <em>方法三句话</em></h2>
+    <div class="methods">
+      <div class="method">
+        <b>先切时间，再切空间</b>
+        <p>用黑场检测把录像切成地图级段落，再按「新元素首次出现」把段落切成房间——房间边界由机制决定，不由墙决定。</p>
+        <em>证据：时间索引（7 段，含 3 处修正）+ 10 次地图加载</em>
+      </div>
+      <div class="method">
+        <b>只画能验证的东西</b>
+        <p>比例尺、门宽、层高都对着尺度表来；画不出来的不画，反推的部分统一标注「示意图，墙位误差 ±0.5 m」。</p>
+        <em>证据：7 张平面图的标题栏与页脚</em>
+      </div>
+      <div class="method">
+        <b>结论要有可数的那一半</b>
+        <p>「03 是引导断点」这种判断，配一个能复现的数字；数不出来的，就明说它是人工判读、误差多少。</p>
+        <em>证据：视角重复率 6.7%（自动） / 41%（人工判读 ±10 个百分点）</em>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <h2>一张补充图 <em>为什么 06 用了 4:09</em></h2>
+    <figure>
+      <img src="assets/parabola.png" alt="06 抛物线对比：一次跳 vs 两次跳">
+      <figcaption>一次跳＝一个大判断（空中无法修正）；两次跳＝两个小判断（第二段落差 1.1 m，低于常规跳跃阈值）。难度没降，压力从手转到眼睛——玩家不是跳不过去，是不敢跳。</figcaption>
+    </figure>
+  </section>
+
+  <section>
+    <div class="note">
+      <b>推断边界。</b>平面图为第一人称录像反推的示意图，非关卡原始几何，墙位误差约 ±0.5 m，不可用于复刻；落差与跨距按画面比例估算（±0.5 m）；「41%」为逐帧人工判读，误差 ±10 个百分点。房间切分沿用我的手工时间索引，与官方地图名不一一对应。
+    </div>
+  </section>
+
+  <footer>
+    <div>素材：实机录像（OBS，1280×720 @30fps）· 自行抽帧 130+ 张 · 平面图 7 张</div>
+    <div><a href="assets/overview.png">平面图总览（原图）</a> · <a href="mailto:">联系</a></div>
+  </footer>
+
+</div>
+</body>
+</html>
